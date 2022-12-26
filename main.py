@@ -8,7 +8,8 @@ class Board:
         self.state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     # Turns the mark number into the mark as string
-    def state_to_mark(self, number):
+    @staticmethod
+    def state_to_mark(number):
         if number == 0:
             return " "
         elif number == 1:
@@ -85,10 +86,10 @@ if __name__ == '__main__':
         try:
             cell = int(input()) - 1
         except ValueError:
-            print("Type in a valid number!")
+            print('\033[31m' + "Type in a valid number!" + '\033[39m')
             continue
         if cell < 0 or cell > 8:
-            print("Type in a valid number!")
+            print('\033[31m' + "Type in a valid number!" + '\033[39m')
             continue
         if board.check_state(cell):
             if active_player == 1:
@@ -111,3 +112,6 @@ if __name__ == '__main__':
         else:
             print('\033[31m' + "There's already a mark DUMBASS! Place it somewhere else..." + '\033[39m')
             continue
+    else:
+        board.print_board()
+        print('\033[31m' + "No turns left! Good Luck next time!")
